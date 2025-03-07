@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "../../../ex10.aggregation.binding"
+		},
+		{
+			"name": "ex11.element.binding",
+			"path": "../.."
+		}
+	],
+	"settings": {}
+}

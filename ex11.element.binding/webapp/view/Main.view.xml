@@ -1,0 +1,50 @@
+<mvc:View controllerName="sync.c10.ex11.element.binding.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+
+
+    <Panel headerText="{i18n>carrierTableTitle}" height="50%">
+        <Table 
+            id="idCarrTable"
+            items="{/Carrier}">
+
+            <columns>
+                <Column><Text text="{i18n>fieldCarrid}"/></Column>
+                <Column><Text text="{i18n>fieldCarrname}"/></Column>
+                <Column><Text text="{i18n>fieldCurrency}"/></Column>
+                <Column><Text text="{i18n>fieldUrl}"/></Column>
+            </columns>    
+
+            <items>
+                <ColumnListItem type="Active" press=".onPress">
+                    <ObjectIdentifier title="{Carrid}"/>
+                    <Text text="{Carrname}"/>
+                    <Text text="{Currcode}"/>
+                    <Link icon="sap-icon://home" text="Link" href="{Url}"/>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </Panel>
+
+    <Panel headerText="{i18n>connectionTableTitle}" height="auto">
+        <Table 
+            id="idConnTable"
+            items="{toConnection/results}"
+            >
+            <columns>
+                <Column><Text text="{i18n>fieldConnid}"/></Column>
+                <Column><Text text="{i18n>fieldCityfrom}"/></Column>
+                <Column><Text text="{i18n>fieldCityto}"/></Column>
+            </columns>
+            <items>
+                <ColumnListItem>
+                    <ObjectIdentifier title="{Connid}"/>
+                    <ObjectIdentifier title="{Cityfrom}"/>
+                    <ObjectIdentifier title="{Cityto}"/>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </Panel>
+    </Page>
+</mvc:View>
