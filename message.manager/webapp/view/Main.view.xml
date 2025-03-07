@@ -1,0 +1,55 @@
+<mvc:View controllerName="sync.c10.message.manager.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout"  
+>
+    <Page id="page" title="{i18n>title}">
+
+        <form:SimpleForm labelSpanM="6">
+        <Label text="입력점검 없는 단순 Binding" labelFor="idInput1"/>
+        <Input id="idInput1" value="{/test1}"/>
+        <Text text="{/test1}"/>
+
+        <Label text="길이 3자리에서 5자리만 입력되는 Binding" labelFor="idInput2"/>
+        <Input 
+            id="idInput2" 
+            value="{
+                 path: '/test2', 
+                 type:'sap.ui.model.type.String', 
+                 constraints: { minLength: 3, maxLength: 5 }
+                }"
+            />
+            <Text text="{/test2}"/>
+
+        <Label text="정수 100에서 200까지만 입력되는 Binding" labelFor="idInput3"/>
+        <Input 
+            id="idInput3" 
+            value="{
+                 path: '/test3', 
+                 type:'sap.ui.model.type.Integer', 
+                 constraints: { minimum: 100, maximum: 200 }
+                }"
+            />
+            <Text text="{/test3}"/>
+
+        <Label text="yyyy.MM.dd를 medium 스타일로 다루기"/>
+        <Input 
+            id="idInput4" 
+            value="{
+                 path: '/test4', 
+                 type:'sap.ui.model.type.Date', 
+                 formatOptions: { source: { pattern : 'yyyy.MM.dd'}, style: 'medium' }
+                }"
+            ><layoutData><layout:GridData span="L2 M2 S12"></layout:GridData></layoutData></Input>
+            <DatePicker value="{ 
+                    path: '/test4',
+                    type: 'sap.ui.model.type.Date',
+                    formatOptions: { source: {pattern: 'yyyy.MM.dd'}, pattern:'yyyy-MM-dd' }
+             }"
+             ><layoutData><layout:GridData span="L3 M3 S12"></layout:GridData></layoutData></DatePicker>
+            <Text text="{/test4}"/>
+
+        </form:SimpleForm>
+    </Page>
+</mvc:View>
