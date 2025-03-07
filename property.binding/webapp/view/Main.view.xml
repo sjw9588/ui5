@@ -1,0 +1,18 @@
+<mvc:View controllerName="sync.c10.property.binding.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:layout="sap.ui.layout"
+>
+    <Page id="page" title="{i18n>title}">
+
+        <layout:VerticalLayout>
+            <layout:content>
+                <Text text="{/firstName}" />
+                <Input value="{/firstName}"
+                    enabled="{/enabled}"/>
+                <CheckBox selected="{/enabled}"/>
+                
+            </layout:content>
+        </layout:VerticalLayout>
+    </Page>
+</mvc:View>
