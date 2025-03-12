@@ -1,0 +1,50 @@
+<mvc:View controllerName="sync.c10.salesreport.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <!-- Detail 부분을 따로 구현하는 view -->
+        <mvc:XMLView 
+            id="idDetailView"
+            viewName="sync.c10.salesreport.view.SalesDetail"
+        />
+
+
+        <!--Sales List 출력하는 부분-->
+        <Panel 
+            headerText="판매목록"
+            height="600px"
+            class="sapUiResponsiveMargin"
+            width="95%">
+        <!--sales모델에서 하나씩 가져오는 List 구현-->
+            <List
+                id="idList"
+                items="{sales>/Orders}"
+            >
+                <items>
+                <!--ObjectListItem 안에 관련 값들을 띄우고
+                attributes를 이용해서 부가 정보도 보이게 해준다.-->
+                    <ObjectListItem
+                        title="{sales>order_id}"
+                        number="{
+                    parts : [ 'sales>amount', 'sales>currency'],
+                    type : 'sap.ui.model.type.Currency',
+                    formatOptions : {
+                        showMeasure : false
+                    }
+                }"
+                        numberUnit="{sales>currency}"
+                        type="Navigation"
+                        press=".onPressItemClick"
+                    >
+                        <attributes>
+                            <ObjectAttribute
+                                text="{sales>order_date} {sales>order_time}"/>
+                            <ObjectAttribute
+                                text="{sales>product_name} x {sales>quantity}" />
+                        </attributes>
+                    </ObjectListItem>
+                </items>
+            </List>
+        </Panel>
+    </Page>
+</mvc:View>

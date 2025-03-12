@@ -1,0 +1,33 @@
+<mvc:View
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:form="sap.ui.layout.form"
+>
+    <!--.여기는 선택한 sales에 대한 detail정보 출력 (simpleform 이용)-->
+    <Panel
+        id="idPanel"
+        headerText="상세 판매내역"
+        class="sapUiResponsiveMargin"
+        width="95%"
+    >
+        <content>
+            <form:SimpleForm 
+                id="idForm"
+                layout="ResponsiveGridLayout"
+            >
+                <!--판매번호-->
+                <Label text="판매번호" />
+                <Input value="{sales>order_id}"
+                       editable="false"
+                />
+
+                <!--판매제품-->
+                <Label text="판매제품"/>
+                <Input
+                    value="{sales>product_name}"
+                    editable="false"
+                />            
+            </form:SimpleForm>
+        </content>
+    </Panel>
+</mvc:View>

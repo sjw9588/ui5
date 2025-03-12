@@ -1,0 +1,32 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+>
+    <!-- sales 정보 팝업창
+         simpleform 이용해서 내용 출력-->
+    <Dialog 
+        id="idDialog"
+        title="상세내역"
+    >
+        <content>
+            <form:SimpleForm layout="ResponsiveGridLayout">
+                <form:content>
+                    <!--판매번호-->
+                    <Label text="판매번호"/>
+                    <Input
+                        value="{sales>order_id}"
+                        editable="false"
+                    />
+
+                    
+                </form:content>
+            </form:SimpleForm>
+        </content>
+
+        <!-- 닫기 버튼 -->
+        <beginButton>
+        
+        </beginButton>
+    </Dialog>
+</c:FragmentDefinition>
