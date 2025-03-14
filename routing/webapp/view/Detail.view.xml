@@ -1,0 +1,110 @@
+<mvc:View
+	controllerName="sync.c10.routing.controller.Detail"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+    xmlns:t="sap.ui.table"
+
+>
+    <Page
+        id="idDetailPage"
+        title="{i18n>titleDetailPage}"
+        showNavButton="true"
+        navButtonPress="onNavPress"
+    >
+        <!--상대경로로 접근하고 있기 때문에-->
+        <!-- <Text text="{BusinessPartner}"></Text> -->
+
+        <ObjectHeader 
+            responsive="true"
+            title="거래처 {BusinessPartner}"
+            intro="{= ${BusinessPartnerRole} === '01' ? '고객' : '공급업체' }"
+        >
+            <attributes>
+                <ObjectAttribute text="이메일: {EmailAddress}"></ObjectAttribute>
+                <ObjectAttribute text="홈페이지: {URL}"></ObjectAttribute>
+                <ObjectAttribute text="통화: {Currency}"></ObjectAttribute>
+            </attributes>
+        </ObjectHeader>
+
+        <Panel class="sapUiResponsiveMargin" headerText="취급하는 제품정보" width="auto">
+            
+            <t:Table 
+                rows="{to_Article}" 
+            >
+                <t:columns>
+                    <t:Column width="10rem">
+                        <t:label>
+                            <Text text="Product"/>
+                        </t:label>
+                        <t:template>
+                            <Text text="{Product}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="10rem">
+                        <t:label>
+                            <Text text="Category"/>
+                        </t:label>
+                        <t:template>
+                            <Text text="{ProductCategory}"/>
+                        </t:template>
+                    </t:Column>
+                    
+                    <t:Column width="10rem" hAlign="Right">
+                        <t:label>
+                            <Text text="Price"/>
+                        </t:label>
+                        <t:template>
+                            <ObjectNumber
+                                number="{
+                                    parts: [
+                                                {path:'Price'},
+                                                {path:'Currency'}
+                                            ],
+                                    type: 'sap.ui.model.type.Currency',
+                                    formatOptions: { showMeasure : false }
+                                    
+                                }"
+                                unit="{Currency}"
+                                textAlign="Right"
+                                emphasized="false"
+                            />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column>
+                        <t:label>
+                            <Text text="Dimension(Height x Width x Depth)"/>
+                        </t:label>
+                        <t:template>
+                            <Text text="{Height} x {Width} x {Depth} {DimensionUnit}"/>
+                        </t:template>
+                    </t:Column>
+
+                    
+                    <t:Column width="10rem" hAlign="Right">
+                        <t:label>
+                            <Text text="Weight"/>
+                        </t:label>
+                        <t:template>
+                            <ObjectNumber
+                                number="{
+                                    parts: [
+                                                {path:'Weight'},
+                                                {path:'WeightUnit'}
+                                            ],
+                                    type: 'sap.ui.model.type.Unit',
+                                    formatOptions: { showMeasure : false }
+                                }"
+                                unit="{WeightUnit}"
+                                textAlign="Right"
+                                emphasized="false"
+                            />
+                        </t:template>
+                    </t:Column>
+
+                </t:columns>
+            </t:Table>
+        </Panel>    
+    </Page>
+</mvc:View>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="http://61.97.134.34:8000/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://61.97.134.34:8000/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://61.97.134.34:8000/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://61.97.134.34:8000/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://61.97.134.34:8000/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://61.97.134.34:8000/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://61.97.134.34:8000/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://61.97.134.34:8000/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://61.97.134.34:8000/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://61.97.134.34:8000/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZGW100_C10_REFERENCE_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="ArticleType" sap:label="GW100 Article Consumption View" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ProductUUID"/>
+                </Key>
+                <Property Name="ProductUUID" Type="Edm.Guid" Nullable="false" sap:label="Node Key" sap:quickinfo="EPM: Generic Node Key"/>
+                <Property Name="Product" Type="Edm.String" MaxLength="10" sap:label="Product ID" sap:quickinfo="EPM: Product ID"/>
+                <Property Name="ProductType" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Type Code" sap:quickinfo="EPM: Product Type Code"/>
+                <Property Name="ProductCategory" Type="Edm.String" MaxLength="40" sap:label="Category" sap:quickinfo="EPM: Product Category"/>
+                <Property Name="Price" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:label="Price" sap:quickinfo="EPM: Product Unit Price"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Currency Code" sap:quickinfo="EPM: Currency Code" sap:semantics="currency-code"/>
+                <Property Name="Height" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="DimensionUnit" sap:label="Height" sap:quickinfo="EPM: Height"/>
+                <Property Name="Width" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="DimensionUnit" sap:label="Width" sap:quickinfo="EPM: Width"/>
+                <Property Name="Depth" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="DimensionUnit" sap:label="Depth" sap:quickinfo="EPM: Depth"/>
+                <Property Name="DimensionUnit" Type="Edm.String" MaxLength="3" sap:label="Dimension Unit" sap:quickinfo="EPM: Dimension Unit" sap:semantics="unit-of-measure"/>
+                <Property Name="ProductPictureURL" Type="Edm.String" MaxLength="255" sap:label="Image" sap:quickinfo="EPM: URI of Product Image"/>
+                <Property Name="ProductValueAddedTax" Type="Edm.Byte" sap:label="Tax Tariff Code" sap:quickinfo="EPM: Product Tax Tariff Code"/>
+                <Property Name="SupplierUUID" Type="Edm.Guid" sap:label="Node Key" sap:quickinfo="EPM: Generic Node Key"/>
+                <Property Name="ProductBaseUnit" Type="Edm.String" MaxLength="3" sap:label="Unit of Measure" sap:quickinfo="EPM: Quantity Unit" sap:semantics="unit-of-measure"/>
+                <Property Name="Weight" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="WeightUnit" sap:label="Weight" sap:quickinfo="EPM: Weight Measure"/>
+                <Property Name="WeightUnit" Type="Edm.String" MaxLength="3" sap:label="Unit of Measure" sap:quickinfo="EPM: Weight Unit" sap:semantics="unit-of-measure"/>
+            </EntityType>
+            <EntityType Name="SupplierType" sap:label="GW100 Supplier Consumption View" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="BusinessPartnerUUID"/>
+                </Key>
+                <Property Name="BusinessPartnerUUID" Type="Edm.Guid" Nullable="false" sap:label="Busi. Partner UUID" sap:quickinfo="EPM: Business Partner Key"/>
+                <Property Name="BusinessPartner" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:text="CompanyName" sap:label="Business Partner ID" sap:quickinfo="EPM: Business Partner ID" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="BusinessPartnerRole" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Bus. Part. Role" sap:quickinfo="EPM: Business Partner Role"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Currency Code" sap:quickinfo="EPM: Currency Code" sap:semantics="currency-code"/>
+                <Property Name="CompanyName" Type="Edm.String" MaxLength="80" sap:label="Company" sap:quickinfo="EPM: Company Name"/>
+                <Property Name="LegalForm" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Legal Form" sap:quickinfo="EPM: Legal Form of Business Partner"/>
+                <Property Name="EmailAddress" Type="Edm.String" MaxLength="255" sap:label="Email" sap:quickinfo="EPM: E-Mail Address" sap:semantics="email"/>
+                <Property Name="FaxNumber" Type="Edm.String" MaxLength="30" sap:label="Fax" sap:quickinfo="EPM: Fax Number" sap:semantics="tel"/>
+                <Property Name="PhoneNumber" Type="Edm.String" MaxLength="30" sap:label="Phone" sap:quickinfo="EPM: Phone Number" sap:semantics="tel"/>
+                <Property Name="URL" Type="Edm.String" sap:label="URI" sap:quickinfo="EPM: Web Address"/>
+                <NavigationProperty Name="to_Article" Relationship="ZGW100_C10_REFERENCE_SRV.assoc_5509A7BE40A2BB8CCE6922762660E57A" FromRole="FromRole_assoc_5509A7BE40A2BB8CCE6922762660E57A" ToRole="ToRole_assoc_5509A7BE40A2BB8CCE6922762660E57A"/>
+            </EntityType>
+            <Association Name="assoc_5509A7BE40A2BB8CCE6922762660E57A" sap:content-version="1">
+                <End Type="ZGW100_C10_REFERENCE_SRV.SupplierType" Multiplicity="1" Role="FromRole_assoc_5509A7BE40A2BB8CCE6922762660E57A"/>
+                <End Type="ZGW100_C10_REFERENCE_SRV.ArticleType" Multiplicity="*" Role="ToRole_assoc_5509A7BE40A2BB8CCE6922762660E57A"/>
+            </Association>
+            <EntityContainer Name="ZGW100_C10_REFERENCE_SRV_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="Article" EntityType="ZGW100_C10_REFERENCE_SRV.ArticleType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="Supplier" EntityType="ZGW100_C10_REFERENCE_SRV.SupplierType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <AssociationSet Name="assoc_5509A7BE40A2BB8CCE6922762660E57A" Association="ZGW100_C10_REFERENCE_SRV.assoc_5509A7BE40A2BB8CCE6922762660E57A" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Supplier" Role="FromRole_assoc_5509A7BE40A2BB8CCE6922762660E57A"/>
+                    <End EntitySet="Article" Role="ToRole_assoc_5509A7BE40A2BB8CCE6922762660E57A"/>
+                </AssociationSet>
+            </EntityContainer>
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <Annotations Target="ZGW100_C10_REFERENCE_SRV.ZGW100_C10_REFERENCE_SRV_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+            </Annotations>
+            <Annotations Target="ZGW100_C10_REFERENCE_SRV.ZGW100_C10_REFERENCE_SRV_Entities/Supplier" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="URL"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_Article"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>URL</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <atom:link rel="self" href="http://61.97.134.34:8000/sap/opu/odata/sap/ZGW100_C10_REFERENCE_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://61.97.134.34:8000/sap/opu/odata/sap/ZGW100_C10_REFERENCE_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

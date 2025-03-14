@@ -1,0 +1,65 @@
+<mvc:View controllerName="sync.c10.routing.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"    
+>
+    <Page id="page" title="{i18n>title}" class="sapUiContentPadding">
+
+            
+        <Panel
+             headerText="{i18n>titleSupplierPanel} (/Supplier의 데이터)"
+             expandable="true"
+             expanded="true"
+        >
+            <headerToolbar>
+                <OverflowToolbar>
+                    <Title text="{i18n>titleSupplierPanel} /Supplier 의 데이터"/>
+                    <ToolbarSpacer />
+                    <Label text="{i18n>columnBusinessPartnerRole}" labelFor="idComboBox"/>
+                    <ComboBox 
+                        id="idComboBox" 
+                        selectedKey="00"
+                        selectionChange="onChange"
+                    >
+                        <items>
+                            <core:Item key="00" text="전체"/>
+                            <core:Item key="01" text="고객"/>
+                            <core:Item key="02" text="공급업체"/>
+                        </items>
+                    
+                    </ComboBox>
+                </OverflowToolbar>
+            </headerToolbar>
+
+
+        <!--업체 정보를 출력하는 Table-->
+        <Table
+            id="idSupplierTable"
+            items="{/Supplier}"    
+            growing="true"
+        >
+            <!--sap.m.Table은 columns로 컬럼을 만들고 items로 데이터를 출력한다.-->
+            <columns>
+                <Column><Text text="{i18n>columnBusinessPartner}"/></Column>
+                <Column><Text text="{i18n>columnBusinessRole}"/></Column>
+                <Column><Text text="{i18n>columnCurrency}"/></Column>
+                <Column><Text text="{i18n>columnCompanyName}"/></Column>
+                
+                <Column><Text text="{i18n>columnEmailAddress}"/></Column>
+                <Column><Text text="{i18n>columnUrl}"/></Column>
+                
+            </columns>
+            <items>
+                <ColumnListItem type="Navigation" press="onPress">
+                    <ObjectIdentifier title="{BusinessPartner}"/>
+                    <Text text="{= ${BusinessPartnerRole} === '01' ? ${i18n>textCustomer} : ${i18n>textVendor}}"/>
+                    <Text text="{Currency}"></Text>
+                    <Text text="{CompanyName}"></Text>
+                    <Text text="{EmailAddress}"></Text>
+                    <Link href="{URL}" text="Link"></Link>
+                </ColumnListItem>
+            </items>
+        </Table>
+        </Panel>
+    </Page>
+</mvc:View>

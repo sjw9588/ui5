@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "../../../salesreport"
+		},
+		{
+			"name": "routing",
+			"path": "../.."
+		}
+	],
+	"settings": {}
+}
