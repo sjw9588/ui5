@@ -1,0 +1,91 @@
+<mvc:View controllerName="sync.c10.gateway.crud.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:t="sap.ui.table"
+>
+    <Page id="page" title="{i18n>title}">
+
+    <!--데이터 생성 구현-->
+    <mvc:XMLView viewName="sync.c10.gateway.crud.view.Create"/>
+
+
+    <!--데이터 Read 구현-->
+    <t:Table 
+        rows="{/CarrierSet}"
+        class="sapUiSmallMargin"
+    >
+        <t:extension>
+            <Title text="{i18n>titleTable}"/>
+        </t:extension>
+        <t:columns>
+            <!--Carrid-->
+            <t:Column >
+                <t:label>
+                    <Text text="{i18n>columnCarrid}"/>
+                </t:label>
+                <t:template>
+                    <Text text="{Carrid}"></Text>
+                </t:template> 
+            </t:Column>
+
+            <!--Carrname-->
+            <t:Column >
+                <t:label>
+                    <Text text="{i18n>columnCarrname}"/>
+                </t:label>
+                <t:template>
+                    <Text text="{Carrname}"></Text>
+                </t:template> 
+            </t:Column>
+
+            <!--Currcode-->
+            <t:Column >
+                <t:label>
+                    <Text text="{i18n>columnCurrcode}"/>
+                </t:label>
+                <t:template>
+                    <Text text="{Currcode}"></Text>
+                </t:template> 
+            </t:Column>
+
+            <!--URL-->
+            <t:Column >
+                <t:label>
+                    <Text text="{i18n>columnUrl}"/>
+                </t:label>
+                <t:template>
+                    <Text text="{Url}"></Text>
+                </t:template> 
+            </t:Column>
+
+
+            <!--수정 버튼-->
+            <t:Column >
+                <t:label>
+                    <Text text="수정"></Text>
+                </t:label>
+                <t:template>
+                    <Button 
+                        icon="sap-icon://edit"
+                        press="onUpdate"
+                        type="Transparent"></Button>
+                </t:template>
+            </t:Column>
+
+            <!--삭제 버튼-->
+            <t:Column >
+                <t:label>
+                    <Text text="삭제"></Text>
+                </t:label>
+                <t:template>
+                    <Button 
+                        icon="sap-icon://delete"
+                        press="onDelete"
+                        type="Transparent"></Button>
+                </t:template>
+            </t:Column>
+
+        </t:columns>
+    </t:Table>
+    </Page>
+</mvc:View>

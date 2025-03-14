@@ -1,0 +1,69 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+>
+    <Dialog 
+        id="idEditDialog"
+        title="{i18n>titleDialog}"
+    >
+        <content>
+            <form:SimpleForm layout="ResponsiveGridLayout">
+            <!--Carrid-->
+            <Label 
+                text="{i18n>columnCarrid}"
+                design="Bold"
+                required="true"
+            />
+            <Input
+                value="{update>/carrier/Carrid}"
+                editable="false"
+            />
+
+            <!--Carrname-->
+            <Label 
+                text="{i18n>columnCarrname}"
+                design="Bold"
+                required="true"
+            />
+            <Input
+                value="{update>/carrier/Carrname}"
+            />
+            <!--Currcode-->
+            <Label 
+                text="{i18n>columnCurrcode}"
+                design="Bold"
+                required="true"
+            />
+            <Input
+                value="{update>/carrier/Currcode}"
+            />
+            <!--Url-->
+            <Label 
+                text="{i18n>columnUrl}"
+                design="Bold"
+                required="true"
+            />
+            <Input
+                value="{update>/carrier/Url}"
+            />
+
+            </form:SimpleForm>
+        </content>  
+
+        <beginButton>
+            <Button 
+                text="{i18n>labelSave}"
+                press="onSave"
+            />
+        </beginButton>
+
+        <endButton>
+            <Button 
+                text="{i18n>labelCancel}"
+                press="onClose"
+            />
+        </endButton>
+    </Dialog>
+
+</c:FragmentDefinition>

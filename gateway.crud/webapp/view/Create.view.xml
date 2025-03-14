@@ -1,0 +1,65 @@
+<mvc:View
+	controllerName="sync.c10.gateway.crud.controller.Create"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:form="sap.ui.layout.form"
+>
+    <!--생성 부분-->
+    <Panel>
+        <headerToolbar>
+            <OverflowToolbar >
+                <Title text="{i18n>titlePanel}"/>
+                <ToolbarSpacer />
+                <Button
+                    icon="sap-icon://save"
+                    text="저장"
+                    type="Accept"
+                    press=".onSave"
+                />
+                <Button
+                    icon="sap-icon://clear-all"
+                    text="초기화"
+                    type="Neutral"
+                    press=".onClear"
+                />
+                    
+            </OverflowToolbar>
+        </headerToolbar>
+        <content>
+            <form:SimpleForm layout="ResponsiveGridLayout">
+                <!--Carrid-->
+                <Label
+                    text="{i18n>columnCarrid}"
+                    design="Bold"
+                    required="true"
+                />
+                <Input value="{new>/carrier/Carrid}" />
+
+                <!--Carrname-->
+                <Label
+                    text="{i18n>columnCarrname}"
+                    design="Bold"
+                    required="true"
+                />
+                <Input value="{new>/carrier/Carrname}" />
+
+                <!--Currcode-->
+                <Label
+                    text="{i18n>columnCurrcode}"
+                    design="Bold"
+                    required="true"
+                />
+                <Input value="{new>/carrier/Currcode}" />
+
+                <!--URL-->
+                <Label
+                    text="{i18n>columnUrl}"
+                    design="Bold"
+                    required="true"
+                />
+                <Input value="{new>/carrier/Url}" />
+            
+            </form:SimpleForm>
+        </content>
+    </Panel>
+</mvc:View>
