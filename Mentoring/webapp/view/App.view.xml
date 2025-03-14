@@ -1,0 +1,14 @@
+<mvc:View
+    controllerName="ui5.walkthrough.controller.App"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+>
+    <!--id를 추가한다. routing에 controlId로 사용한다.(manifest.json)-->
+    <Shell>
+        <App
+            class="myAppDemoWT"
+            id="app"
+        />
+    </Shell>
+</mvc:View>

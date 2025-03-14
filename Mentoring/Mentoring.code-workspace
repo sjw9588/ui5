@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "odata.mentoring",
+			"path": "../odata.mentoring"
+		}
+	],
+	"settings": {}
+}
