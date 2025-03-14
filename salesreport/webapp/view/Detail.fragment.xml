@@ -19,14 +19,58 @@
                         editable="false"
                     />
 
-                    
+                    <!--판매제품-->
+                    <Label text="판매제품"/>
+                    <Input 
+                        value="{sales>product_name}"
+                        editable="false"
+                    />
+
+                    <!--개당가격-->
+                    <Label text="개당가격"/>
+                    <Input
+                        value="{
+                            parts: [ 'sales>price', 'sales>currency'],
+                            type : 'sap.ui.model.type.Currency',
+                            formatOptions : {
+                                showMeasure : false
+                            }   
+                        }"
+                        editable="false"
+                    />
+                    <!--판매수량-->
+                    <Label text="판매수량"/>
+                    <Input 
+                        value="{
+                            parts : ['sales>quantity', 'view>/Unit'],
+                            type : 'sap.ui.model.type.Unit',
+                            formatOptions:{
+                                showMeasure : true
+                            }
+                        }"
+                        editable="false"
+                    />
+                    <!--판매금액-->
+                    <Label text="판매금액"/>
+                    <Input
+                        value="{
+                            parts : ['sales>amount', 'sales>currency'],
+                            type : 'sap.ui.model.type.Currency',
+                            formatOptions : {
+                                showMeasure : true    
+                            }
+                        }"
+                        editable="false"
+                    />                    
                 </form:content>
             </form:SimpleForm>
         </content>
 
         <!-- 닫기 버튼 -->
         <beginButton>
-        
+            <Button 
+                text="닫기"
+                press=".onCloseDialog"></Button>
         </beginButton>
     </Dialog>
 </c:FragmentDefinition>
