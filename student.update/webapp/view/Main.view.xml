@@ -1,0 +1,23 @@
+<mvc:View controllerName="sync.c10.student.update.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+
+        <List 
+            headerText="{i18n>titleList}"
+            items="{
+                path: '/StudentSet',
+                sorter: [ { path: 'Stdid'}]
+                }" >
+            <items>
+                <StandardListItem 
+                    title="{Stdid}"
+                    description="{Name}"
+                    type="Active"
+                    press="onItemPress"
+                    />
+            </items>
+        </List>
+
+    </Page>
+</mvc:View>

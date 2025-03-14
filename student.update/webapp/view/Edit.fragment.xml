@@ -1,0 +1,45 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+>
+    <Dialog 
+        id="idEditDialog"
+        title="{i18n>titleDialog}"
+        >
+        <content>
+            <form:SimpleForm layout="ResponsiveGridLayout">
+                <Label 
+                    text="{i18n>labelStdid}"
+                    design="Bold"
+                    required="true"
+                />
+                <Input value="{
+                        model: 'update',
+                        path: '/student/Stdid',
+                        type: 'sap.ui.model.type.String',
+                        constraints: { minLength: 1 }
+                    }"
+                    type="Number"
+                    editable="false"
+                />
+
+                <Label text="{i18n>labelName}"/>
+                <Input value="{update>/student/Name}"/>
+            </form:SimpleForm>
+        </content>
+
+        <beginButton>
+            <Button 
+                text="{i18n>labelSave}"
+                press="onSave"
+                />
+
+        </beginButton>
+        <endButton>
+            <Button 
+                text="{i18n>labelCancel}"
+                press="onClose"/>
+        </endButton>
+    </Dialog>
+</c:FragmentDefinition>
