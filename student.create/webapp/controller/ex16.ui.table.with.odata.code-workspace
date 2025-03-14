@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "../../../ex16.ui.table.with.odata"
+		},
+		{
+			"name": "student.create",
+			"path": "../.."
+		}
+	],
+	"settings": {}
+}

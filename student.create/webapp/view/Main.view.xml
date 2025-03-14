@@ -1,0 +1,49 @@
+<mvc:View
+    controllerName="sync.c10.student.create.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
+        <Panel>
+            <headerToolbar>
+                <OverflowToolbar>
+                    <Title text="{i18n>titlePanel}" />
+                    <ToolbarSpacer />
+                    <Button
+                        icon="sap-icon://save"
+                        text="저장"
+                        type="Accept"
+                        press="onSave"
+                    />
+                    <Button
+                        icon="sap-icon://clear-all"
+                        text="초기화"
+                        type="Neutral"
+                        press="onClear"
+                    />
+                </OverflowToolbar>
+            </headerToolbar>
+            <content>
+                <form:SimpleForm layout="ResponsiveGridLayout">
+                    <Label
+                        text="{i18n>labelStdid}"
+                        design="Bold"
+                        required="true"
+                    />
+                    <Input value="{new>/student/Stdid}" />
+
+                    <Label
+                        text="{i18n>labelName}"
+                        design="Bold"
+                        required="true"
+                    />
+                    <Input value="{new>/student/Name}" />
+                </form:SimpleForm>
+            </content>
+        </Panel>
+    </Page>
+</mvc:View>
