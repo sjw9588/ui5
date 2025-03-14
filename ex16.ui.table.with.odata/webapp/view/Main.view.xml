@@ -1,0 +1,175 @@
+<mvc:View controllerName="sync.c10.ex16.ui.table.with.odata.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:t="sap.ui.table"
+    >
+    <Page id="page" title="{i18n>title}"
+          class="sapUiContentPadding">
+
+          <t:Table 
+            rows="{/UX_C_Flight_TP}"
+            selectionMode="Single"
+            selectionBehavior="Row"
+            rowSelectionChange="onSelection"
+          >
+            <t:extension>
+                <OverflowToolbar >
+                    <Title text="{i18n>titleFlightTable}"/>
+                </OverflowToolbar>
+            </t:extension>
+            <t:columns>
+
+                <t:Column >
+                <t:label>
+                    <Text text="{i18n>columnCarrier}"></Text>
+                </t:label>
+                <t:template>
+                    <ObjectIdentifier title="{Carrid}"></ObjectIdentifier>
+                </t:template>
+                </t:Column>
+
+                <t:Column >
+                <t:label>
+                    <Text text="{i18n>columnConnid}"></Text>
+                </t:label>
+                <t:template>
+                    <ObjectIdentifier title="{Connid}"></ObjectIdentifier>
+                  </t:template>
+                </t:Column>
+
+                <t:Column >
+                <t:label>
+                    <Text text="{i18n>columnFldate}"></Text>
+                </t:label>
+                <t:template>
+                   <ObjectIdentifier title="{
+                        path: 'Fldate',
+                        type: 'sap.ui.model.odata.type.Date',
+                        formatOptions:{
+                            pattern: 'dd.MM.yyyy'
+                        }
+                    }"/>
+                  </t:template>
+                </t:Column>
+
+                <t:Column >
+                <t:label>
+                    <Text text="{i18n>columnSeatsmax}"></Text>
+                </t:label>
+                <t:template>
+                     <ObjectIdentifier title="{Seatsmax}"></ObjectIdentifier>
+                  </t:template>
+                </t:Column>
+
+                <t:Column >
+                <t:label>
+                    <Text text="{i18n>columnSeatsocc}"></Text>
+                </t:label>
+                <t:template>
+                    <ObjectIdentifier title="{Seatsocc}"></ObjectIdentifier>
+                  </t:template>
+                </t:Column>
+
+
+            </t:columns>
+          </t:Table>
+
+          <t:Table 
+                id="idBookTable"
+                rows="{to_Booking}"
+                selectionMode="Single"
+                selectionBehavior="Row"
+          >
+            <t:extension>
+                <OverflowToolbar >
+                    <Title text="{i18n>titleBookingTable}"/>
+                </OverflowToolbar>
+            </t:extension>
+
+            <t:columns>
+                <t:Column >
+                    <t:label>
+                        <Text text="{i18n>columnCarrier}"></Text>
+                    </t:label>
+                    <t:template>
+                        <ObjectIdentifier title="{Carrid}"></ObjectIdentifier>
+                    </t:template>
+                </t:Column>
+                
+                <t:Column >
+                    <t:label>
+                        <Text text="{i18n>columnConnid}"></Text>
+                    </t:label>
+                    <t:template>
+                        <ObjectIdentifier title="{Connid}"></ObjectIdentifier>
+                    </t:template>
+                </t:Column>
+
+                <t:Column >
+                    <t:label>
+                        <Text text="{i18n>columnFldate}"></Text>
+                    </t:label>
+                    <t:template>
+                       <ObjectIdentifier title="{
+                        path: 'Fldate',
+                        type: 'sap.ui.model.odata.type.Date',
+                        formatOptions:{
+                            pattern: 'dd.MM.yyyy'
+                        }
+                    }"/>
+                    </t:template>
+                </t:Column>
+
+                <t:Column >
+                    <t:label>
+                        <Text text="{i18n>columnBookid}"></Text>
+                    </t:label>
+                    <t:template>
+                        <ObjectIdentifier title="{Bookid}"></ObjectIdentifier>
+                    </t:template>
+                </t:Column>
+
+                 <t:Column >
+                    <t:label>
+                        <Text text="{i18n>columnPassname}"></Text>
+                    </t:label>
+                    <t:template>
+                        <ObjectIdentifier title="{Passname}"></ObjectIdentifier>
+                    </t:template>
+                </t:Column>
+
+                 <t:Column >
+                    <t:label>
+                        <Text text="{i18n>columnOrderdate}"></Text>
+                    </t:label>
+                    <t:template>
+                       <ObjectIdentifier title="{
+                        path: 'OrderDate',
+                        type: 'sap.ui.model.odata.type.Date',
+                        formatOptions:{
+                            pattern: 'dd.MM.yyyy'
+                        }
+                    }"/>
+                    </t:template>
+                </t:Column>
+
+                <t:Column >
+                    <t:label>
+                        <Text text="{i18n>columnCancelled}"></Text>
+                    </t:label>
+                    <t:template>
+                        <ObjectIdentifier title="{Cancelled}"></ObjectIdentifier>
+                    </t:template>
+                </t:Column>
+            </t:columns>
+          </t:Table>
+    </Page>
+</mvc:View>
+
+                    
+                    
+                    
+
+                    
+                   
+                    
