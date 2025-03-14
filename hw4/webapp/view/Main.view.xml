@@ -1,0 +1,44 @@
+<mvc:View controllerName="sync.c10.hw4.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+    <!--sap.m.Table 를 사용하면, sap.m.List 와 다르게 컬럼 표현이 가능하다.-->
+        <Table id="idConnTable"
+               items="{conn>/Connection}">
+            <!--items=”{conn>/Connection}” 로 표현된 이유는 앞서 manifest.json에서 명명한 모델명이 
+            ‘conn’이고, 이 json파일을 보면 아래와 같이 Connection 이라는 Key 데이터가 존재하므로 
+            이를 절대경로로 표현해줌으로써, 아래에서 해당 items 경로에 이은 경로를 작성하여
+            데이터를 인식할 수 있게 해준다.-->
+            <columns>
+            <Column><Text text="{i18n>fieldCarrid}"></Text></Column>
+            <!--Column의 i18n>fieldCarrid 와 같은 형태는 sap의 Text element와 같은 역할을 하는 
+            i18n.properties 파일과 연결되는 개념이다.-->
+            <Column><Text text="{i18n>fieldConnid}"></Text></Column>
+            <Column><Text text="{i18n>fieldCountryfr}"></Text></Column>
+            <Column><Text text="{i18n>fieldCityfrom}"></Text></Column>
+            <Column><Text text="{i18n>fieldCountryto}"></Text></Column>
+            <Column><Text text="{i18n>fieldCityto}"></Text></Column>
+            </columns>
+
+            <!--테이블의 각 행을 동적으로 생성하기 위해 사용되며,  'conn' 모델의 경로를 지정하며, 
+            이 경로에 해당하는 데이터를 각 행에 바인딩한다.
+            아래의 <ColumnListItem>를 통해 실제 각 행의 구조를 정의하고, 
+            테이블에 표시될 각 데이터 항목의 시각적 표현을 설정한다.-->
+            <items>
+            <!--ColumnListItem 컨트롤은 SAPUI5에서 테이블이나 리스트의 각 행을 표현하는데 사용되며, 
+            데이터 바인딩을 지원하여 Model에서 직접 데이터를 가져와 동적으로 행을 생성할 수 있도록 해준다. 
+            이에 따라, 다량의 데이터를 효과적으로 불러올 수 있다.-->
+                <ColumnListItem type="Active" press=".onPressOpenDialog">
+                <!--ObjectIdentifier는 객체의 제목과 선택적 텍스트를 표시하여 객체를 나타내는 UI 컨트롤이다. 
+                링크를 추가하거나 글씨를 굵게 하는 등의 옵션을 추가할 수 있다. (키 필드들만 적용함)-->
+                    <ObjectIdentifier title="{conn>CARRID}"/>
+                    <ObjectIdentifier title="{conn>CONNID}"/>
+                    <Text text="{conn>COUNTRYFR}"/>
+                    <Text text="{conn>CITYFROM}"/>
+                    <Text text="{conn>COUNTRYTO}"/>
+                    <Text text="{conn>CITYTO}"/>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </Page>
+</mvc:View>
