@@ -1,0 +1,88 @@
+<mvc:View
+    controllerName="sync.c10.odata.northwind.controller.Orders"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+>
+    <Page
+        id="idOrdersPage"
+        title="{i18n>titleOrdersPage}"
+        showNavButton="true"
+        navButtonPress="onNavpress"
+    >
+        <!-- 넘어온 Customer에 대한 정보를 먼저 출력 -->
+        <ObjectHeader
+            responsive="true"
+            title="Customer {CustomerID} : {ContactName}"
+            intro="Company Name : {CompanyName}"
+        >
+            <attributes>
+                <ObjectAttribute text="ContactTitle : {ContactTitle}" />
+                <ObjectAttribute text="Phone : {Phone}" />
+            </attributes>
+        </ObjectHeader>
+
+        <Panel
+            class="sapUiResponsiveMargin"
+            headerText="관련 Orders"
+            width="auto"
+            expandable="true"
+            expanded="true"
+        >
+            <!-- 
+                Customers에 관련된 Orders 정보만 보이는 테이블
+                여기서 / 쓰지 않는 이유는 
+                해당하는 Customer의 NavigationProperty가 Orders인 부분을 가져올 것이기 때문
+            -->
+            <Table
+                id="idOrdersTable"
+                items="{Orders}"
+                growing="true"
+            >
+                <columns>
+                    <!-- OrderID -->
+                    <Column>
+                        <Text text="{i18n>columnOrderID}" />
+                    </Column>
+
+                    <!-- CustomerID -->
+                    <Column>
+                        <Text text="{i18n>columnCustomerID}" />
+                    </Column>
+
+                    <!-- OrderDate -->
+                    <Column>
+                        <Text text="{i18n>columnOrderDate}" />
+                    </Column>
+
+                    <!-- ShipName -->
+                    <Column>
+                        <Text text="{i18n>columnShipName}" />
+                    </Column>
+
+                    <!-- ShipCountry -->
+                    <Column>
+                        <Text text="{i18n>columnShipCountry}" />
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem>
+                        <ObjectIdentifier title="{OrderID}" />
+                        <ObjectIdentifier title="{CustomerID}" />
+                        <Text
+                            text="{
+                            path : 'OrderDate', 
+                            type : 'sap.ui.model.type.Date', 
+                            formatOptions : {
+                                pattern : 'yyyy/MM/dd'
+                            }
+                        }"
+                        />
+                        <Text text="{ShipName}" />
+                        <Text text="{ShipCountry}" />
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </Panel>
+    </Page>
+</mvc:View>

@@ -1,0 +1,97 @@
+<mvc:View controllerName="sync.c10.odata.northwind.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:t="sap.ui.table"
+>
+    <Page 
+        id="page" 
+        title="{i18n>title}"
+        class="sapUiContentPadding"
+    >
+        <Panel height="auto">
+            <headerToolbar>
+                <OverflowToolbar>
+                    <Title text="{i18n>titleCustomerTable}" />
+                    <ToolbarSpacer />
+                </OverflowToolbar>
+            </headerToolbar>
+
+            <!-- 
+	            /Customer 에서 모든 customers를 가지고 온다. 
+            
+            -->
+            <t:Table
+                rows="{/Customers}"
+                selectionMode="Single"
+                selectionBehavior="Row"
+                rowSelectionChange="onSelection"
+                class="sapUiSmallMargin"
+                id="idCustomerTable"
+                visibleRowCount="15"
+            >
+                <!-- 컬럼들 정보 -->
+                <t:columns>
+                    <!-- CustomerID -->
+                    <t:Column>
+                        <t:label>
+                            <Text text="{i18n>columnCustomerID}" />
+                        </t:label>
+                        <t:template>
+                            <ObjectIdentifier title="{CustomerID}" />
+                        </t:template>
+                    </t:Column>
+
+                    <!-- CompanyName -->
+                    <t:Column>
+                        <t:label>
+                            <Text text="{i18n>columnCompanyName}" />
+                        </t:label>
+                        <t:template>
+                            <Text text="{CompanyName}" />
+                        </t:template>
+                    </t:Column>
+
+                    <!-- ContactName -->
+                    <t:Column>
+                        <t:label>
+                            <Text text="{i18n>columnContactName}" />
+                        </t:label>
+                        <t:template>
+                            <Text text="{ContactName}" />
+                        </t:template>
+                    </t:Column>
+
+                    <!-- ContactTitle -->
+                    <t:Column>
+                        <t:label>
+                            <Text text="{i18n>columnContactTitle}" />
+                        </t:label>
+                        <t:template>
+                            <Text text="{ContactTitle}" />
+                        </t:template>
+                    </t:Column>
+
+                    <!-- Country -->
+                    <t:Column>
+                        <t:label>
+                            <Text text="{i18n>columnCountry}" />
+                        </t:label>
+                        <t:template>
+                            <Text text="{Country}" />
+                        </t:template>
+                    </t:Column>
+
+                    <!-- Phone -->
+                    <t:Column>
+                        <t:label>
+                            <Text text="{i18n>columnPhone}" />
+                        </t:label>
+                        <t:template>
+                            <Text text="{Phone}" />
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+        </Panel>
+    </Page>
+</mvc:View>
