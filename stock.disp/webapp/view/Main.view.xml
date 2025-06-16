@@ -1,0 +1,405 @@
+<mvc:View
+    controllerName="sync.cc.mm.stock.disp.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:layout="sap.ui.layout"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:t="sap.ui.table"
+    xmlns:core="sap.ui.core"
+    xmlns:chart="sap.suite.ui.commons"
+>
+    <!-- 전체 페이지 구성 -->
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >            
+    <!-- 배너 이미지 Panel -->
+<Panel
+    id="idMainBannerPanel"
+    expandable="true"
+    expanded="true"
+    backgroundDesign="Transparent"
+    class="sapUiNoContentPadding"
+>
+    <Image
+        id="idMainBannerImage"
+        alt="배너"
+        src="{banner>/bannerImagePath}"
+        height="auto"
+        width="100%"
+    />
+</Panel>
+
+        <!-- 차트 및 조회조건 고정 영역 -->
+        <layout:FixFlex
+            id="chartFixFlex"
+            minFlexSize="250"
+        >
+            <layout:fixContent>
+
+
+            
+                <Panel class="sapUiSmallMarginBottom">
+                    <headerToolbar>
+                        <OverflowToolbar>
+                            <Title text="조회조건" />
+                            <ToolbarSpacer />
+                            <Button
+                                text="조회"
+                                icon="sap-icon://search"
+                                press="onSearch"
+                            />
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <!-- 조회 조건 입력 필드들 -->
+                    <content>
+                        <HBox
+                            class="sapUiSmallMargin"
+                            renderType="Bare"
+                        >
+                            <!-- 제품유형 선택 -->
+                            <Label
+                                text="제품유형 : "
+                                class="sapUiSmallMarginEnd"
+                            />
+                            <Select
+                                id="mtartSelect"
+                                selectedKey="{view>/where/mtart}"
+                                change="onMtartChange"
+                                width="10rem"
+                                class="sapUiSmallMarginEnd"
+                            >
+                                <items>
+                                    <core:Item
+                                        key=""
+                                        text="전체"
+                                    />
+                                    <core:Item
+                                        key="FERT"
+                                        text="FERT (완제품)"
+                                    />
+                                    <core:Item
+                                        key="HALB"
+                                        text="HALB (반제품)"
+                                    />
+                                    <core:Item
+                                        key="ROH"
+                                        text="ROH (원자재)"
+                                    />
+                                </items>
+                            </Select>
+                            <!-- 자재코드 입력 + SearchHelp 연결 -->
+                            <Label
+                                text="자재코드 : "
+                                class="sapUiSmallMarginEnd"
+                            />
+                            <Input
+                                id="matnrInput"
+                                value="{view>/where/matnr}"
+                                width="12rem"
+                                placeholder="ex) FERT100001"
+                                showValueHelp="true"
+                                valueHelpRequest="onValueHelpMatnr"
+                                class="sapUiSmallMarginEnd"
+                            />
+                            <SelectDialog
+                                id="idMatnrSelectDialog"
+                                title="자재 검색"
+                                search="onSearchMatnrDialog"
+                                confirm="onSelectMatnr"
+                            />
+                            <!-- 플랜트코드 입력 + SearchHelp -->
+                            <Label
+                                text="플랜트코드 : "
+                                class="sapUiSmallMarginEnd"
+                            />
+                            <Input
+                                id="werksInput"
+                                value="{view>/where/werks}"
+                                showValueHelp="true"
+                                valueHelpRequest="onValueHelpWerks"
+                                width="10rem"
+                                placeholder="ex) P1700"
+                                class="sapUiSmallMarginEnd"
+                            />
+                            <SelectDialog
+                                id="idWerksSelectDialog"
+                                title="플랜트 검색"
+                                search="onSearchWerksDialog"
+                                confirm="onSelectWerks"
+                            />
+                            <!-- 저장위치 입력 + SearchHelp -->
+                            <Label
+                                text="저장위치 : "
+                                class="sapUiSmallMarginEnd"
+                            />
+                            <Input
+                                id="lgortInput"
+                                value="{view>/where/lgort}"
+                                showValueHelp="true"
+                                valueHelpRequest="onValueHelpLgort"
+                                width="10rem"
+                                placeholder="ex) S1700"
+                                class="sapUiSmallMarginEnd"
+                            />
+                            <SelectDialog
+                                id="idLgortSelectDialog"
+                                title="저장위치 검색"
+                                search="onSearchLgortDialog"
+                                confirm="onSelectLgort"
+                            />
+                        </HBox>
+                    </content>
+                </Panel>
+            </layout:fixContent>
+
+            <!-- 메인 차트 영역 -->
+            <layout:flexContent>
+                <!-- ChartContainer 영역 -->
+                <chart:ChartContainer
+                    showFullScreen="true"
+                    showPersonalization="false"
+                    autoAdjustHeight="true"
+                    title="자재 재고 차트"
+                    enableBrowserFullScreen="true"
+                >
+                    <chart:content>
+                        <chart:ChartContainerContent
+                            icon="sap-icon://column-chart"
+                            title="자재 재고 차트"
+                        >
+                            <chart:content>
+                                <viz:VizFrame
+                                    id="idVizFrame"
+                                    uiConfig="{
+                        applicationSet: 'fiori'
+                    }"
+                                    height="100%"
+                                    width="99%"
+                                    vizType="stacked_column"
+                                >
+                                    <!-- 데이터셋 바인딩 -->
+                                    <viz:dataset>
+                                        <viz.data:FlattenedDataset
+                                            data="{/ZCC_CDS_V_043}"
+                                        >
+                                            <viz.data:dimensions>
+                                                <viz.data:DimensionDefinition
+                                                    name="저장위치"
+                                                    value="{lgort}"
+                                                />
+                                                <viz.data:DimensionDefinition
+                                                    name="자재"
+                                                    value="{matnr}"
+                                                />
+                                                <viz.data:DimensionDefinition
+                                                    name="플랜트"
+                                                    value="{werks}"
+                                                />
+                                            </viz.data:dimensions>
+                                            <viz.data:measures>
+                                                <viz.data:MeasureDefinition
+                                                    name="총재고"
+                                                    value="{labst}"
+                                                />
+                                                <viz.data:MeasureDefinition
+                                                    name="가용재고"
+                                                    value="{avstk}"
+                                                />
+                                                <viz.data:MeasureDefinition
+                                                    name="불용재고"
+                                                    value="{speme}"
+                                                />
+                                            </viz.data:measures>
+                                        </viz.data:FlattenedDataset>
+                                    </viz:dataset>
+                                    <!-- 축 연결 -->
+                                    <viz:feeds>
+                                        <viz.feeds:FeedItem
+                                            uid="valueAxis"
+                                            type="Measure"
+                                            values="가용재고,불용재고"
+                                        />
+                                        <viz.feeds:FeedItem
+                                            uid="categoryAxis"
+                                            type="Dimension"
+                                            values="저장위치,자재,플랜트"
+                                        />
+                                    </viz:feeds>
+                                    <!-- 툴팁 팝업 연결 -->
+                                    <viz:dependents>
+                                        <viz:Popover id="idPopOver" />
+                                    </viz:dependents>
+                                </viz:VizFrame>
+                            </chart:content>
+                        </chart:ChartContainerContent>
+                    </chart:content>
+                </chart:ChartContainer>
+            </layout:flexContent>
+        </layout:FixFlex>
+        <!-- 테이블 영역: 재고 데이터 목록 -->
+        <t:Table
+            id="table"
+            rows="{/ZCC_CDS_V_043}"
+            class="sapUiSmallMargin"
+            selectionMode="None"
+        >
+            <t:extension>
+                <Title text="{i18n>titleTable}" />
+            </t:extension>
+            <!-- 각 컬럼 = CDS View 필드와 매핑 -->
+            <t:columns>
+                <!--MATNR 자재 번호-->
+                <t:Column width="6.5rem">
+                    <t:label>
+                        <Text text="{i18n>columnMatnr}" />
+                    </t:label>
+                    <t:template>
+                        <Text text="{matnr}" />
+                    </t:template>
+                </t:Column>
+                <!--MAKTX 자재명-->
+                <t:Column width="9rem">
+                    <t:label>
+                        <Text text="{i18n>columnMaktx}" />
+                    </t:label>
+                    <t:template>
+                        <Text text="{maktx}" />
+                    </t:template>
+                </t:Column>
+                <!--WERKS 플랜트 코드-->
+                <t:Column>
+                    <t:label>
+                        <Text text="{i18n>columnWerks}" />
+                    </t:label>
+                    <t:template>
+                        <Text text="{werks}" />
+                    </t:template>
+                </t:Column>
+                <!--LGORT 저장위치 코드-->
+                <t:Column width="4.5rem">
+                    <t:label>
+                        <Text text="{i18n>columnLgort}" />
+                    </t:label>
+                    <t:template>
+                        <Text text="{lgort}" />
+                    </t:template>
+                </t:Column>
+                <!--LABST 총 재고량-->
+                <t:Column width="6rem">
+                    <t:label>
+                        <Text text="{i18n>columnLabst}" />
+                    </t:label>
+                    <t:template>
+                        <Text text="{labst}" />
+                    </t:template>
+                </t:Column>
+                <!--AVSTK 가용재고-->
+                <t:Column width="6rem">
+                    <t:label>
+                        <Text text="{i18n>columnAvstk}" />
+                    </t:label>
+                    <t:template>
+                        <Text text="{avstk}" />
+                    </t:template>
+                </t:Column>
+                <!--SPEME 불용재고-->
+                <t:Column width="4.5rem">
+                    <t:label>
+                        <Text text="{i18n>columnSpeme}" />
+                    </t:label>
+                    <t:template>
+                        <Text text="{speme}" />
+                    </t:template>
+                </t:Column>
+                <!--MEINS 단위-->
+                <t:Column width="3rem">
+                    <t:label>
+                        <Text text="{i18n>columnMeins}" />
+                    </t:label>
+                    <t:template>
+                        <Text text="{meins}" />
+                    </t:template>
+                </t:Column>
+                <!--SALK3 총 금액-->
+                <t:Column width="9rem">
+                    <t:label>
+                        <Text text="{i18n>columnSalk3}" />
+                    </t:label>
+                    <t:template>
+                        <!-- <Text text="{Salk3}" /> -->
+                        <ObjectNumber
+                            number="{
+                                path: 'salk3',
+                                type: 'sap.ui.model.type.Integer',
+                                formatOptions: {
+                                    groupingEnabled: true
+                                }
+                            }"
+                            unit="{waers}"
+                            wrapping="false"
+                            textAlign="End"
+                        />
+                    </t:template>
+                </t:Column>
+                <!--WAERS 통화-->
+                <!-- <t:Column>
+                    <t:label>
+                        <Text text="{i18n>columnWaers}" />
+                    </t:label>
+                    <t:template>
+                        <Text text="{Waers}" />
+                    </t:template>
+                </t:Column> -->
+                <!--AENAM 변경자-->
+                <t:Column width="5.5rem">
+                    <t:label>
+                        <Text text="{i18n>columnAenam}" />
+                    </t:label>
+                    <t:template>
+                        <Text text="{aenam}" />
+                    </t:template>
+                </t:Column>
+                <!--AEDAT 변경일-->
+                <t:Column width="6rem">
+                    <t:label>
+                        <Text text="{i18n>columnAedat}" />
+                    </t:label>
+                    <t:template>
+                        <!-- <Text text="{Aedat}" /> -->
+                        <Text
+                            text="{
+                            path: 'aedat',
+                            type: 'sap.ui.model.type.Date',
+                            formatOptions: {
+                                style: 'short',
+                                pattern: 'yyyy-MM-dd'
+                            }
+                        }"
+                        />
+                    </t:template>
+                </t:Column>
+                <!--AEZET 변경시각-->
+                <t:Column width="4.5rem">
+                    <t:label>
+                        <Text text="{i18n>columnAezet}" />
+                    </t:label>
+                    <t:template>
+                        <!-- <Text text="{Aezet}" /> -->
+                        <Text
+                            text="{
+                            path: 'aezet',
+                            type: 'sap.ui.model.odata.type.Time',
+                            formatOptions: {
+                                pattern: 'HH:mm:ss'
+                            }
+                        }"
+                        />
+                    </t:template>
+                </t:Column>
+            </t:columns>
+        </t:Table>
+    </Page>
+</mvc:View>

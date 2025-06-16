@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "3.1"
+metadata:
+  name: sync.cc.mm.stock.disp
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          url: http://61.97.134.34:8000
+          client: '200'
+        app:
+          name: ZCC_MM_C10_2
+          description: '[MM] 창고별 자재조회'
+          package: ZCC_MM
+          transport: EFXK901973
+        exclude:
+          - /test/
