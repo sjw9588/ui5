@@ -1,0 +1,132 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+  <Dialog
+    id="prDetailDialog"
+    title="구매요청 상세"
+    contentWidth="64rem"
+    draggable="true"
+    resizable="true"
+    class="sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer"
+  >
+    <HBox class="sapUiMediumMargin" renderType="Bare">
+      <!-- 좌측 열 -->
+      <VBox class="sapUiSmallMarginEnd" width="50%">
+        <HBox class="sapUiSmallMarginBottom">
+          <Label text="요청번호" width="7rem" />
+          <Text text="{prDetailModel>/Banfn}" />
+        </HBox>
+        <HBox class="sapUiSmallMarginBottom">
+          <Label text="항목번호" width="7rem" />
+          <Text text="{prDetailModel>/Bnfpo}" />
+        </HBox>
+        <HBox class="sapUiSmallMarginBottom">
+          <Label text="자재코드" width="7rem" />
+          <Text text="{prDetailModel>/Matnr}" />
+        </HBox>
+        <HBox class="sapUiSmallMarginBottom">
+          <Label text="플랜트" width="7rem" />
+          <Text text="{prDetailModel>/Werks}" />
+        </HBox>
+        <HBox class="sapUiSmallMarginBottom">
+          <Label text="저장위치" width="7rem" />
+          <Text text="{prDetailModel>/Lgort}" />
+        </HBox>
+        <HBox class="sapUiSmallMarginBottom">
+          <Label text="수량" width="7rem" />
+          <Text text="{prDetailModel>/Menge}" />
+        </HBox>
+        <HBox class="sapUiSmallMarginBottom">
+          <Label text="단위" width="7rem" />
+          <Text text="{prDetailModel>/Meins}" />
+        </HBox>
+        <HBox class="sapUiSmallMarginBottom">
+          <Label text="납기일" width="7rem" />
+          <Text text="{prDetailModel>/Badat}" />
+        </HBox>
+        <HBox class="sapUiSmallMarginBottom">
+          <Label text="납품예정일" width="7rem" />
+          <Text text="{prDetailModel>/Lfdat}" />
+        </HBox>
+        <HBox class="sapUiSmallMarginBottom">
+          <Label text="공급업체" width="7rem" />
+          <Text text="{prDetailModel>/Lifnr}" />
+        </HBox>
+        <HBox class="sapUiSmallMarginBottom">
+          <Label text="관세율" width="7rem" />
+          <Text text="{prDetailModel>/Imduty}" />
+        </HBox>
+      </VBox>
+
+      <!-- 우측 열 -->
+      <VBox width="50%">
+        <HBox class="sapUiSmallMarginBottom">
+          <Label text="단가(달러)" width="7rem" />
+          <Text text="{prDetailModel>/Netpr}" />
+        </HBox>
+        <HBox class="sapUiSmallMarginBottom">
+          <Label text="통화" width="7rem" />
+          <Text text="{prDetailModel>/Waers}" />
+        </HBox>
+        <HBox class="sapUiSmallMarginBottom">
+          <Label text="생산계획번호" width="7rem" />
+          <Text text="{prDetailModel>/Pplan}" />
+        </HBox>
+        <HBox class="sapUiSmallMarginBottom">
+          <Label text="메모" width="7rem" />
+          <Text text="{prDetailModel>/Memo}" />
+        </HBox>
+        <HBox class="sapUiSmallMarginBottom">
+          <Label text="삭제표시" width="7rem" />
+          <Text text="{prDetailModel>/Lvorm}" />
+        </HBox>
+        <HBox class="sapUiSmallMarginBottom">
+          <Label text="구매그룹" width="7rem" />
+          <Text text="{prDetailModel>/Ekgrp}" />
+        </HBox>
+        <HBox class="sapUiSmallMarginBottom">
+          <Label text="생성자" width="7rem" />
+          <Text text="{prDetailModel>/Ernam}" />
+        </HBox>
+        <HBox class="sapUiSmallMarginBottom">
+          <Label text="생성일" width="7rem" />
+          <Text text="{prDetailModel>/Erdat}" />
+        </HBox>
+        <HBox class="sapUiSmallMarginBottom">
+          <Label text="생성시각" width="7rem" />
+          <Text
+            text="{
+              path: 'prDetailModel>/Erzet',
+              type: 'sap.ui.model.odata.type.Time',
+              formatOptions: {
+                pattern: 'HH:mm:ss'
+              }
+            }"
+          />
+        </HBox>
+        <HBox class="sapUiSmallMarginBottom">
+          <Label text="변경자" width="7rem" />
+          <Text text="{prDetailModel>/Aenam}" />
+        </HBox>
+        <HBox class="sapUiSmallMarginBottom">
+          <Label text="변경일" width="7rem" />
+          <Text text="{prDetailModel>/Aedat}" />
+        </HBox>
+        <HBox class="sapUiSmallMarginBottom">
+          <Label text="변경시각" width="7rem" />
+          <Text
+            text="{
+              path: 'prDetailModel>/Aezet',
+              type: 'sap.ui.model.odata.type.Time',
+              formatOptions: {
+                pattern: 'HH:mm:ss'
+              }
+            }"
+          />
+        </HBox>
+      </VBox>
+    </HBox>
+
+    <endButton>
+      <Button text="닫기" press=".onClosePRDetail" type="Reject" />
+    </endButton>
+  </Dialog>
+</core:FragmentDefinition>

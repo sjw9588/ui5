@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "3.1"
+metadata:
+  name: sync.cc.mm.pr.suggestion
+type: application
+framework:
+  name: SAPUI5
+  version: 1.120.0
+  libraries:
+    - name: sap.m
+    - name: sap.ui.core
+    - name: sap.ushell
+    - name: themelib_sap_horizon
+server:
+  customMiddleware:
+    - name: fiori-tools-appreload
+      afterMiddleware: compression
+      configuration:
+        port: 35729
+        path: webapp
+        delay: 300
+    - name: fiori-tools-preview
+      afterMiddleware: fiori-tools-appreload
+      configuration:
+        component: sync.cc.mm.pr.suggestion
+        ui5Theme: sap_horizon
+    - name: fiori-tools-proxy
+      afterMiddleware: compression
+      configuration:
+        ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
+        backend:
+          - path: /sap
+            url: http://61.97.134.34:8000
+            client: '200'
+          - url: http://61.97.134.34:8000
+            client: '200'
+            destination: 교육용 서버 C10
+            path: /sap/opu/odata/SAP/ZCC_GW_0419_SRV/
+    - name: sap-fe-mockserver
+      beforeMiddleware: csp
+      configuration:
+        mountPath: /
+        services:
+          - urlPath: /sap/opu/odata/sap/ZCC_CDS_V_041_CDS
+            metadataPath: ./webapp/localService/mainService/metadata.xml
+            mockdataPath: ./webapp/localService/mainService/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata/SAP/ZCC_GW_0419_SRV
+            metadataPath: ./webapp/localService/ZCC_GW_0419_SRV/metadata.xml
+            mockdataPath: ./webapp/localService/ZCC_GW_0419_SRV/data
+            generateMockData: true
+        annotations:
+          - localPath: ./webapp/localService/mainService/ZCC_CDS_V_041_CDS_VAN.xml
+            urlPath: /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZCC_CDS_V_041_CDS_VAN',Version='0001')/$value/

@@ -1,0 +1,367 @@
+<mvc:View
+    controllerName="sync.cc.mm.pr.suggestion.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:t="sap.ui.table"
+    xmlns:core="sap.ui.core"
+    xmlns:micro="sap.suite.ui.microchart"
+>
+    <Page
+        id="page"
+        title=""
+    >
+        <content>
+            <!-- 배너 이미지 Panel -->
+            <Panel
+                id="idMainBannerPanel"
+                expandable="true"
+                expanded="true"
+                backgroundDesign="Transparent"
+                class="sapUiNoContentPadding"
+            >
+                <Image
+                    id="idMainBannerImage"
+                    alt="배너"
+                    src="{banner>/bannerImagePath}"
+                    width="100%"
+                    height="auto"
+                    press="onBannerPress"
+                    densityAware="false"
+                    error="onImageError"
+                />
+            </Panel>
+            <!-- 조회 조건 영역 -->
+            <VBox class="sapUiTinyMargin noVerticalSpacing">
+                <HBox
+                    alignItems="Center"
+                    class="sapUiTinyMarginBottom"
+                >
+                    <Label
+                        text="제품유형:"
+                        width="4rem"
+                    />
+                    <Text
+                        text="ROH(원자재)"
+                        class="sapUiSmallMarginEnd"
+                    />
+                </HBox>
+                <HBox
+                    alignItems="Center"
+                    wrap="Wrap"
+                    class="sapUiTinyMarginBottom"
+                >
+                    <!-- 자재코드: MultiInput (다중 선택 및 수동 입력) -->
+                    <Label
+                        text="자재코드:"
+                        width="4rem"
+                    />
+                    <MultiInput
+                        id="multiInputMatnr"
+                        width="12rem"
+                        showValueHelp="true"
+                        valueHelpRequest="onValueHelpMatnr"
+                        class="sapUiSmallMarginEnd"
+                        tokenUpdate="onMatnrTokenUpdate"
+                        submit="onMatnrSubmit"
+                    >
+                        <tokens>
+                            <Token
+                                key="{view>key}"
+                                text="{view>text}"
+                            />
+                        </tokens>
+                    </MultiInput>
+                    <!-- 플랜트: 단일 선택 Input -->
+                    <Label
+                        text="플랜트:"
+                        width="4rem"
+                    />
+                    <Input
+                        value="{view>/where/werks}"
+                        width="8rem"
+                        showValueHelp="true"
+                        valueHelpRequest="onValueHelpWerks"
+                        class="sapUiSmallMarginEnd"
+                    />
+                    <!-- 저장위치: 단일 선택 Input -->
+                    <Label
+                        text="저장위치:"
+                        width="4rem"
+                    />
+                    <Input
+                        value="{view>/where/lgort}"
+                        width="8rem"
+                        showValueHelp="true"
+                        valueHelpRequest="onValueHelpLgort"
+                        class="sapUiSmallMarginEnd"
+                    />
+                    <!-- 조회 버튼 -->
+                    <Button
+                        text="조회"
+                        icon="sap-icon://search"
+                        press="onSearch"
+                    />
+                </HBox>
+            </VBox>
+
+            <!-- 재주문 제안 목록 Table -->
+            <Panel
+                headerText="재주문 제안 목록"
+                class="sapUiTinyMarginTop sapUiNoContentPadding"
+                expandable="false"
+            >
+                <Table
+                    id="proposalTable"
+                    items="{result>/list}"
+                    mode="None"
+                    width="100%"
+                    fixedLayout="true"
+                    class="sapUiSizeCompact"
+                    itemPress="onItemPress"
+                >
+                    <!-- 테이블 컬럼 정의 -->
+                    <columns>
+                        <Column>
+                            <Text text="자재" />
+                        </Column>
+                        <Column>
+                            <Text text="자재명" />
+                        </Column>
+                        <Column>
+                            <Text text="플랜트" />
+                        </Column>
+                        <Column>
+                            <Text text="저장위치" />
+                        </Column>
+                        <Column>
+                            <Text text="가용재고" />
+                        </Column>
+                        <Column>
+                            <Text text="PR 수량" />
+                        </Column>
+                        <Column>
+                            <Text text="PO 수량" />
+                        </Column>
+                        <Column>
+                            <Text text="목표재고량" />
+                        </Column>
+                        <Column>
+                            <Text text="확보가능재고" />
+                        </Column>
+                        <Column>
+                            <Text text="실 재고량" />
+                        </Column>
+                        <Column>
+                            <Text text="확보 재고량" />
+                        </Column>
+                        <Column>
+                            <Text text="제안수량" />
+                        </Column>
+                    </columns>
+
+                    <!-- 테이블 항목 셀 바인딩 -->
+                    <items>
+                        <ColumnListItem type="Active">
+                            <cells>
+                                <Text text="{result>matnr}" />
+                                <Text text="{result>maktx}" />
+                                <Text text="{result>werks}" />
+                                <Text text="{result>lgort}" />
+                                <ObjectNumber
+                                    number="{result>avstk}"
+                                    unit="{result>meins}"
+                                />
+                                <ObjectNumber
+                                    number="{result>pr_open_qty}"
+                                    unit="{result>meins}"
+                                />
+                                <ObjectNumber
+                                    number="{result>po_open_qty}"
+                                    unit="{result>meins}"
+                                />
+                                <ObjectNumber
+                                    number="{result>target_qty}"
+                                    unit="{result>meins}"
+                                />
+                                <ObjectNumber
+                                    number="{result>total_avail}"
+                                    unit="{result>meins}"
+                                />
+                                <!-- 실 재고량 비율 표시 (RadialMicroChart 포함) -->
+                                <HBox
+                                    alignItems="Center"
+                                    justifyContent="SpaceBetween"
+                                >
+                                    <Text
+                                        text="{= ${result>stockRatio} + '% 가용'}"
+                                        width="2rem"
+                                        textAlign="End"
+                                    />
+                                    <micro:RadialMicroChart
+                                        percentage="{result>stockRatio}"
+                                        valueColor="{= ${result>stockRatio} >= 100 ? 'Good' : (${result>stockRatio} >= 50 ? 'Critical' : 'Error')}"
+                                        size="S"
+                                    />
+                                </HBox>
+                                <!-- 확보 가능 비율 -->
+                                <HBox
+                                    alignItems="Center"
+                                    justifyContent="SpaceBetween"
+                                >
+                                    <Text
+                                        text="{= ${result>availRatio} + '% 확보'}"
+                                    />
+                                    <micro:RadialMicroChart
+                                        percentage="{result>availRatio}"
+                                        valueColor="{= ${result>availRatio} >= 100 ? 'Good' : (${result>availRatio} >= 50 ? 'Critical' : 'Error')}"
+                                        size="S"
+                                    />
+                                </HBox>
+                                <!-- 제안 수량 강조 표시 -->
+                                <ObjectNumber
+                                    number="{result>proposal_qty}"
+                                    unit="{result>meins}"
+                                    emphasized="true"
+                                />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </Panel>
+
+            <!-- 구매요청 목록 -->
+            <Panel
+                headerText="구매요청 목록"
+                class="sapUiMediumMarginTop"
+                expandable="true"
+                expanded="true"
+            >
+                <IconTabBar
+                    id="prTabBar"
+                    select="onPRTabSelect"
+                    expanded="true"
+                >
+                    <items>
+                        <IconTabFilter
+                            key="1"
+                            text="승인요청 이전"
+                            count="{view>/counts/1}"
+                            icon="sap-icon://request"
+                            iconColor="Critical"
+                        />
+                        <IconTabFilter
+                            key="2"
+                            text="승인대기"
+                            count="{view>/counts/2}"
+                            icon="sap-icon://pending"
+                            iconColor="Information"
+                        />
+                        <IconTabFilter
+                            key="3"
+                            text="승인완료"
+                            count="{view>/counts/3}"
+                            icon="sap-icon://accept"
+                            iconColor="Positive"
+                        />
+                        <IconTabFilter
+                            key="4"
+                            text="반려"
+                            count="{view>/counts/4}"
+                            icon="sap-icon://decline"
+                            iconColor="Negative"
+                        />
+                        <IconTabFilter
+                            key="5"
+                            text="구매오더 전환"
+                            count="{view>/counts/5}"
+                            icon="sap-icon://cart"
+                            iconColor="Neutral"
+                        />
+                    </items>
+
+                    <content>
+                        <VBox class="sapUiNoContentPadding">
+                            <MessageStrip
+                                text="파란색 행은 재주문 제안 프로그램에서 생성된 항목입니다."
+                                type="Information"
+                                showIcon="true"
+                                showCloseButton="false"
+                                class="sapUiTinyMarginBottom"
+                            />
+
+                            <Table
+                                id="prTable"
+                                items="{filteredPR>/list}"
+                                mode="MultiSelect"
+                                itemPress="onPRRowPress"
+                                growing="true"
+                                growingThreshold="10"
+                                class="sapUiSizeCompact"
+                                width="100%"
+                                fixedLayout="false"
+                            >
+                                <headerToolbar>
+                                    <Toolbar>
+                                        <Title text="구매요청 목록" />
+                                        <ToolbarSpacer />
+                                        <Button
+                                            text="선택 삭제"
+                                            icon="sap-icon://delete"
+                                            type="Reject"
+                                            press=".onDeleteSelectedPR"
+                                        />
+                                    </Toolbar>
+                                </headerToolbar>
+                                <columns>
+                                    <Column>
+                                        <Text text="요청번호" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="항목번호" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="자재코드" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="플랜트" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="저장위치" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="수량" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="단위" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="납품요청일" />
+                                    </Column>
+                                </columns>
+
+                                <items>
+                                    <ColumnListItem
+                                        type="Active"
+                                        press="onPRRowPress"
+                                        highlight="{= ${filteredPR>Memo} === '재주문 제안으로 생성됨.' ? 'Information' : 'None'}"
+                                    >
+                                        <cells>
+                                            <Text text="{filteredPR>Banfn}" />
+                                            <Text text="{filteredPR>Bnfpo}" />
+                                            <Text text="{filteredPR>Matnr}" />
+                                            <Text text="{filteredPR>Werks}" />
+                                            <Text text="{filteredPR>Lgort}" />
+                                            <Text text="{filteredPR>Menge}" />
+                                            <Text text="{filteredPR>Meins}" />
+                                            <Text text="{filteredPR>Badat}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </VBox>
+                    </content>
+                </IconTabBar>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>

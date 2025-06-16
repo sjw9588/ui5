@@ -1,0 +1,108 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <!-- 구매요청 생성용 다이얼로그 팝업 -->
+    <Dialog
+        id="createPRDialog"
+        title="구매요청 생성"
+        contentWidth="30rem"
+        draggable="true"
+        resizable="true"
+        class="sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer"
+    >
+        <!-- 다이얼로그 내부 내용: 자재 정보 및 입력 -->
+        <VBox class="sapUiMediumMargin">
+            <!-- 자재 코드 -->
+            <HBox class="sapUiSmallMarginBottom">
+                <Label
+                    text="자재 코드"
+                    width="7rem"
+                />
+                <Text text="{dialogModel>/matnr}" />
+            </HBox>
+
+            <!-- 자재명 -->
+            <HBox class="sapUiSmallMarginBottom">
+                <Label
+                    text="자재명"
+                    width="7rem"
+                />
+                <Text text="{dialogModel>/maktx}" />
+            </HBox>
+
+            <!-- 플랜트 -->
+            <HBox class="sapUiSmallMarginBottom">
+                <Label
+                    text="플랜트"
+                    width="7rem"
+                />
+                <Text text="{dialogModel>/werks}" />
+            </HBox>
+
+            <!-- 저장위치 -->
+            <HBox class="sapUiSmallMarginBottom">
+                <Label
+                    text="저장위치"
+                    width="7rem"
+                />
+                <Text text="{dialogModel>/lgort}" />
+            </HBox>
+
+            <!-- 제안수량 (변경 가능) -->
+            <HBox
+                class="sapUiSmallMarginBottom"
+                alignItems="Center"
+            >
+                <Label
+                    text="제안 수량"
+                    width="7rem"
+                />
+                <Input
+                    value="{dialogModel>/proposal_qty}"
+                    type="Number"
+                    width="8rem"
+                />
+                <Text
+                    text="{dialogModel>/meins}"
+                    class="sapUiSmallMarginBegin"
+                />
+            </HBox>
+
+            <!-- 납기요청일 (최소 14일 이후) -->
+            <HBox
+                class="sapUiSmallMarginBottom"
+                alignItems="Center"
+            >
+                <Label
+                    text="납기요청일"
+                    width="7rem"
+                />
+                <DatePicker
+                    value="{dialogModel>/badat}"
+                    displayFormat="yyyy-MM-dd"
+                    valueFormat="yyyy-MM-dd"
+                    width="12rem"
+                    minDate="{dialogModel>/minDate}"
+                />
+            </HBox>
+        </VBox>
+
+        <!-- 저장 버튼: Controller의 onSavePR 호출 -->
+        <beginButton>
+            <Button
+                text="저장"
+                 type="Accept"
+                press=".onSavePR"
+            />
+        </beginButton>
+        <!-- 닫기 버튼: Controller의 onClosePRDialog 호출 -->
+        <endButton>
+            <Button
+                text="닫기"
+                type="Reject"
+                press=".onClosePRDialog"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>
